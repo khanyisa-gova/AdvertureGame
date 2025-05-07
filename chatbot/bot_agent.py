@@ -14,4 +14,9 @@ tools = [
 agent = initialize_agent(tools, llm, agent_type="zero-shot-react-description")
 
 def get_bot_response(user_input: str) -> str:
-    return agent.run(user_input)
+    try:
+        return agent.run(user_input)
+    except Exception as e:
+        print("LangChain Error:", e)  # <--- log the real error
+        return "Error contacting the chatbot."
+
